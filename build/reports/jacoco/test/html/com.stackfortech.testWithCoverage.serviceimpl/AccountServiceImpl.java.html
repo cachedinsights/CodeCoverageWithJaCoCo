@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">testWithCoverage</a> &gt; <a href="index.source.html" class="el_package">com.stackfortech.testWithCoverage.serviceimpl</a> &gt; <span class="el_source">AccountServiceImpl.java</span></div><h1>AccountServiceImpl.java</h1><pre class="source lang-java linenums">package com.stackfortech.testWithCoverage.serviceimpl;
+
+import com.stackfortech.testWithCoverage.error.ErrorHandlerService;
+import com.stackfortech.testWithCoverage.model.Account;
+import com.stackfortech.testWithCoverage.model.Transfer;
+import com.stackfortech.testWithCoverage.response.ErrorResponse;
+import com.stackfortech.testWithCoverage.response.SuccessResponse;
+import com.stackfortech.testWithCoverage.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Service
+<span class="fc" id="L18">public class AccountServiceImpl implements AccountService {</span>
+
+    @Autowired
+    private ErrorHandlerService errorHandlerService;
+
+<span class="fc" id="L23">    private static Map&lt;Long, Account&gt; accountMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L24">    private Long currentKey = 1L;</span>
+
+
+    @Override
+    public ResponseEntity&lt;?&gt; findOne(Long accountNumber) {
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if(accountMap.containsKey(accountNumber))</span>
+        {
+<span class="fc" id="L31">            Account accountToRet =  accountMap.get(accountNumber);</span>
+<span class="fc" id="L32">            SuccessResponse successResponse = new SuccessResponse(&quot;Transaction Successful&quot;,accountToRet,200);</span>
+<span class="fc" id="L33">            return  new ResponseEntity&lt;&gt;(successResponse,HttpStatus.OK);</span>
+
+        }
+        else
+        {
+<span class="fc" id="L38">            ErrorResponse errorResponse = errorHandlerService.inValidAccountNumber(&quot;Account Number does not exist&quot;,400,null);</span>
+<span class="fc" id="L39">            return new ResponseEntity&lt;&gt;(errorResponse,HttpStatus.OK);</span>
+        }
+    }
+
+    @Override
+    public ResponseEntity&lt;?&gt; depositToAccount(Account account) {
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        if(accountMap.containsKey(account.getAccountNumber()))</span>
+        {
+<span class="nc" id="L47">            Long currentAmount = accountMap.get(account.getAccountNumber()).getAmount();</span>
+<span class="nc" id="L48">            Long newAmount = currentAmount + account.getAmount();</span>
+<span class="nc" id="L49">            Account newAccount = accountMap.get(account.getAccountNumber());</span>
+<span class="nc" id="L50">            newAccount.setAmount(newAmount);</span>
+<span class="nc" id="L51">            accountMap.replace(account.getAccountNumber(),newAccount);</span>
+<span class="nc" id="L52">            SuccessResponse successResponse =new SuccessResponse(&quot;Deposit successful&quot;,newAccount,200);</span>
+<span class="nc" id="L53">            return new ResponseEntity&lt;&gt;(successResponse,HttpStatus.OK);</span>
+        }
+        else
+        {
+<span class="nc" id="L57">            ErrorResponse errorResponse = errorHandlerService.inValidAccountNumber(&quot;Invalid Account Number&quot;,400,null);</span>
+<span class="nc" id="L58">            return new ResponseEntity&lt;&gt;(errorResponse,HttpStatus.OK);</span>
+        }
+    }
+
+    @Override
+    public ResponseEntity&lt;?&gt; withdrawFromAccount(Account account) {
+
+<span class="nc bnc" id="L65" title="All 4 branches missed.">         if(accountMap.containsKey(account.getAccountNumber()) &amp;&amp; accountMap.get(account.getAccountNumber()).getAmount() &gt;= account.getAmount())</span>
+        {
+<span class="nc" id="L67">            Long currentAmount = accountMap.get(account.getAccountNumber()).getAmount();</span>
+<span class="nc" id="L68">            Long newAmount = currentAmount - account.getAmount();</span>
+<span class="nc" id="L69">            Account newAccount = accountMap.get(account.getAccountNumber());</span>
+<span class="nc" id="L70">            newAccount.setAmount(newAmount);</span>
+<span class="nc" id="L71">            accountMap.replace(account.getAccountNumber(),newAccount);</span>
+<span class="nc" id="L72">            SuccessResponse successResponse = new SuccessResponse(&quot;Withdrawal successful&quot;,newAccount,200);</span>
+<span class="nc" id="L73">            ResponseEntity&lt;SuccessResponse&gt; response = new ResponseEntity&lt;SuccessResponse&gt;(successResponse,HttpStatus.OK);</span>
+<span class="nc" id="L74">            return response;</span>
+        }
+        else
+        {
+<span class="nc" id="L78">            ErrorResponse errorResponse = errorHandlerService.insufficientFunds(&quot;Insufficient Funds.&quot;,400,accountMap.get(account.getAccountNumber()));</span>
+<span class="nc" id="L79">            ResponseEntity&lt;ErrorResponse&gt; response = new ResponseEntity&lt;&gt;(errorResponse, HttpStatus.OK);</span>
+<span class="nc" id="L80">            return response;</span>
+        }
+
+    }
+
+    @Override
+    public ResponseEntity&lt;?&gt; createAccount(Account account) {
+        Account accountToRet;
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        if(account.getAmount() &lt; 0)</span>
+        {
+<span class="nc" id="L90">           return null;</span>
+        }
+<span class="nc bnc" id="L92" title="All 4 branches missed.">        else if(account.getAccountNumber()!=null &amp;&amp; !accountMap.containsKey(account.getAccountNumber()))</span>
+        {
+<span class="nc" id="L94">            accountMap.put(account.getAccountNumber(),account);</span>
+<span class="nc" id="L95">            currentKey = account.getAccountNumber();</span>
+        }
+        else
+        {
+<span class="nc" id="L99">            account.setAccountNumber(++currentKey);</span>
+<span class="nc" id="L100">            accountMap.put(currentKey,account);</span>
+        }
+<span class="nc" id="L102">        accountToRet = accountMap.get(currentKey);</span>
+<span class="nc" id="L103">        SuccessResponse successResponse = new SuccessResponse(&quot;Account Created Successfully!&quot;,accountToRet,200);</span>
+<span class="nc" id="L104">        return new ResponseEntity&lt;&gt;(successResponse,HttpStatus.OK);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;?&gt; transfer(Transfer transfer) {
+        ErrorResponse errorResponse;
+<span class="fc bfc" id="L110" title="All 2 branches covered.">        if(!accountMap.containsKey(transfer.getToAccountNumber()))</span>
+        {
+<span class="fc" id="L112">            errorResponse = errorHandlerService.invalidToAccount(&quot;Invalid destination Account Number&quot;,400,null);</span>
+<span class="fc" id="L113">            return new ResponseEntity&lt;&gt;(errorResponse,HttpStatus.OK);</span>
+        }
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        else if(!accountMap.containsKey(transfer.getFromAccountNumber()))</span>
+        {
+<span class="fc" id="L117">            errorResponse = errorHandlerService.invalidToAccount(&quot;Invalid source Account Number&quot;,400,null);</span>
+<span class="fc" id="L118">            return new ResponseEntity&lt;&gt;(errorResponse,HttpStatus.OK);</span>
+        }
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        else if(accountMap.get(transfer.getFromAccountNumber()).getAmount() &lt; transfer.getTransferAmount())</span>
+        {
+<span class="fc" id="L122">            errorResponse = errorHandlerService.insufficientFunds(&quot;Not Enough Funds to carry out transaction!&quot;,400,accountMap.get(transfer.getFromAccountNumber()));</span>
+<span class="fc" id="L123">            return new ResponseEntity&lt;&gt;(errorResponse,HttpStatus.OK);</span>
+        }
+<span class="fc" id="L125">        Account  fromAccount = accountMap.get(transfer.getFromAccountNumber());</span>
+<span class="fc" id="L126">        Account toAccount = accountMap.get(transfer.getToAccountNumber());</span>
+<span class="fc" id="L127">        fromAccount.setAmount(fromAccount.getAmount()-transfer.getTransferAmount());</span>
+<span class="fc" id="L128">        toAccount.setAmount(toAccount.getAmount()+transfer.getTransferAmount());</span>
+<span class="fc" id="L129">        accountMap.replace(fromAccount.getAccountNumber(),fromAccount);</span>
+<span class="fc" id="L130">        accountMap.replace(toAccount.getAccountNumber(),toAccount);</span>
+<span class="fc" id="L131">        SuccessResponse successResponse = new SuccessResponse(&quot;Fund transferred Successful!&quot;,fromAccount,200);</span>
+<span class="fc" id="L132">        ResponseEntity&lt;SuccessResponse&gt; responseEntity = new ResponseEntity&lt;&gt;(successResponse,HttpStatus.OK);</span>
+<span class="fc" id="L133">        return responseEntity;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

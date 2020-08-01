@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Account.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">testWithCoverage</a> &gt; <a href="index.source.html" class="el_package">com.stackfortech.testWithCoverage.model</a> &gt; <span class="el_source">Account.java</span></div><h1>Account.java</h1><pre class="source lang-java linenums">package com.stackfortech.testWithCoverage.model;
+
+public class Account {
+
+    private String currency;
+    private Long amount;
+    private Long accountNumber;
+    private double rateOfInterest;
+    private String accountType;
+    private String accountStatus;
+
+<span class="nc" id="L12">    public Account(String currency, Long amount, Long accountNumber, double rateOfInterest, String accountType, String accountStatus) {</span>
+<span class="nc" id="L13">        this.currency = currency;</span>
+<span class="nc" id="L14">        this.amount = amount;</span>
+<span class="nc" id="L15">        this.accountNumber = accountNumber;</span>
+<span class="nc" id="L16">        this.rateOfInterest = rateOfInterest;</span>
+<span class="nc" id="L17">        this.accountType = accountType;</span>
+<span class="nc" id="L18">        this.accountStatus = accountStatus;</span>
+<span class="nc" id="L19">    }</span>
+
+<span class="fc" id="L21">    public Account() {</span>
+<span class="fc" id="L22">    }</span>
+
+    public String getCurrency() {
+<span class="fc" id="L25">        return currency;</span>
+    }
+
+    public void setCurrency(String currency) {
+<span class="fc" id="L29">        this.currency = currency;</span>
+<span class="fc" id="L30">    }</span>
+
+    public Long getAmount() {
+<span class="fc" id="L33">        return amount;</span>
+    }
+
+    public void setAmount(Long amount) {
+<span class="fc" id="L37">        this.amount = amount;</span>
+<span class="fc" id="L38">    }</span>
+
+    public Long getAccountNumber() {
+<span class="fc" id="L41">        return accountNumber;</span>
+    }
+
+    public void setAccountNumber(Long accountNumber) {
+<span class="fc" id="L45">        this.accountNumber = accountNumber;</span>
+<span class="fc" id="L46">    }</span>
+
+    public double getRateOfInterest() {
+<span class="nc" id="L49">        return rateOfInterest;</span>
+    }
+
+    public void setRateOfInterest(double rateOfInterest) {
+<span class="fc" id="L53">        this.rateOfInterest = rateOfInterest;</span>
+<span class="fc" id="L54">    }</span>
+
+    public String getAccountType() {
+<span class="fc" id="L57">        return accountType;</span>
+    }
+
+    public void setAccountType(String accountType) {
+<span class="fc" id="L61">        this.accountType = accountType;</span>
+<span class="fc" id="L62">    }</span>
+
+    public String getAccountStatus() {
+<span class="fc" id="L65">        return accountStatus;</span>
+    }
+
+    public void setAccountStatus(String accountStatus) {
+<span class="fc" id="L69">        this.accountStatus = accountStatus;</span>
+<span class="fc" id="L70">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L74">        return &quot;Account{&quot; +</span>
+                &quot;currency='&quot; + currency + '\'' +
+                &quot;, amount=&quot; + amount +
+                &quot;, accountNumber=&quot; + accountNumber +
+                &quot;, rateOfInterest=&quot; + rateOfInterest +
+                &quot;, accountType='&quot; + accountType + '\'' +
+                &quot;, accountStatus='&quot; + accountStatus + '\'' +
+                '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

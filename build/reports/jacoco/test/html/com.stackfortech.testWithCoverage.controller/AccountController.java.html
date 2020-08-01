@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">testWithCoverage</a> &gt; <a href="index.source.html" class="el_package">com.stackfortech.testWithCoverage.controller</a> &gt; <span class="el_source">AccountController.java</span></div><h1>AccountController.java</h1><pre class="source lang-java linenums">package com.stackfortech.testWithCoverage.controller;
+
+import com.stackfortech.testWithCoverage.model.Account;
+import com.stackfortech.testWithCoverage.model.Transfer;
+import com.stackfortech.testWithCoverage.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(&quot;/api/v1&quot;)
+<span class="fc" id="L12">public class AccountController {</span>
+
+    @Autowired
+    private AccountService accountService;
+
+    @GetMapping(&quot;/account/{id}&quot;)
+    public ResponseEntity&lt;?&gt; getAccountDetail(@PathVariable Long id)
+    {
+<span class="nc" id="L20">        return accountService.findOne(id);</span>
+
+    }
+    @PostMapping(&quot;/create&quot;)
+    public ResponseEntity&lt;?&gt; createAccount(@RequestBody Account account)
+    {
+<span class="nc" id="L26">        return accountService.createAccount(account);</span>
+    }
+
+    @PutMapping(&quot;/deposit&quot;)
+    public ResponseEntity&lt;?&gt; deposit(@RequestBody Account account)
+    {
+<span class="nc" id="L32">        return accountService.depositToAccount(account);</span>
+    }
+
+    @PutMapping(&quot;/withdraw&quot;)
+    public ResponseEntity&lt;?&gt; withdraw(@RequestBody Account account)
+    {
+<span class="nc" id="L38">        return accountService.withdrawFromAccount(account);</span>
+    }
+    @PostMapping(&quot;/transfer&quot;)
+    public ResponseEntity&lt;?&gt; transfer(@RequestBody Transfer transfer)
+    {
+<span class="nc" id="L43">        return accountService.transfer(transfer);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,9 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+testWithCoverage,com.stackfortech.testWithCoverage.model,Transfer,47,28,0,0,8,13,3,8,3,8
+testWithCoverage,com.stackfortech.testWithCoverage.model,Account,67,42,0,0,10,19,3,12,3,12
+testWithCoverage,com.stackfortech.testWithCoverage.serviceimpl,AccountServiceImpl,204,170,12,8,32,27,9,8,3,4
+testWithCoverage,com.stackfortech.testWithCoverage,TestWithCoverageApplication,5,3,0,0,2,1,1,1,1,1
+testWithCoverage,com.stackfortech.testWithCoverage.error,ErrorHandlerService,45,3,0,0,10,1,5,1,5,1
+testWithCoverage,com.stackfortech.testWithCoverage.response,SuccessResponse,45,15,0,0,11,6,7,2,7,2
+testWithCoverage,com.stackfortech.testWithCoverage.response,ErrorResponse,60,0,0,0,17,0,9,0,9,0
+testWithCoverage,com.stackfortech.testWithCoverage.controller,AccountController,25,3,0,0,5,1,5,1,5,1

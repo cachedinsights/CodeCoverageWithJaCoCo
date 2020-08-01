@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ErrorHandlerService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">testWithCoverage</a> &gt; <a href="index.source.html" class="el_package">com.stackfortech.testWithCoverage.error</a> &gt; <span class="el_source">ErrorHandlerService.java</span></div><h1>ErrorHandlerService.java</h1><pre class="source lang-java linenums">package com.stackfortech.testWithCoverage.error;
+
+import com.stackfortech.testWithCoverage.response.ErrorResponse;
+import org.springframework.stereotype.Service;
+
+@Service
+<span class="fc" id="L7">public class ErrorHandlerService {</span>
+
+    public ErrorResponse insufficientFunds(String message, int statusCode, Object object)
+    {
+<span class="nc" id="L11">        ErrorResponse errorResponse = new ErrorResponse(message,object,statusCode);</span>
+<span class="nc" id="L12">        return errorResponse;</span>
+    }
+
+    public ErrorResponse inValidAccountNumber(String message, int statusCode, Object object)
+    {
+<span class="nc" id="L17">        ErrorResponse errorResponse = new ErrorResponse(message,object,statusCode);</span>
+<span class="nc" id="L18">        return errorResponse;</span>
+    }
+
+    public ErrorResponse accountNotActive(String message, int statusCode, Object object)
+    {
+<span class="nc" id="L23">        ErrorResponse errorResponse = new ErrorResponse(message,object,statusCode);</span>
+<span class="nc" id="L24">        return errorResponse;</span>
+    }
+
+    public ErrorResponse invalidToAccount(String message, int statusCode, Object object)
+    {
+<span class="nc" id="L29">        ErrorResponse errorResponse = new ErrorResponse(message,object,statusCode);</span>
+<span class="nc" id="L30">        return errorResponse;</span>
+    }
+    public ErrorResponse invalidFromAccount(String message, int statusCode, Object object)
+    {
+<span class="nc" id="L34">        ErrorResponse errorResponse = new ErrorResponse(message,object,statusCode);</span>
+<span class="nc" id="L35">        return errorResponse;</span>
+    }
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
